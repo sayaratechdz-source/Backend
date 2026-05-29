@@ -1,0 +1,112 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": "Store products with stock and pricing"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "productTitle": {
+      "type": "string",
+      "required": true
+    },
+    "sku": {
+      "type": "uid",
+      "targetField": "productTitle",
+      "required": true,
+      "unique": true
+    },
+    "productPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "discount": {
+      "type": "decimal",
+      "default": 0,
+      "description": "Discount percentage or fixed amount"
+    },
+    "productDescription": {
+      "type": "text",
+      "required": true
+    },
+    "productRating": {
+      "type": "decimal",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "PEUGEOT",
+        "RENAULT",
+        "VOLKSWAGEN",
+        "SEAT",
+        "SKODA",
+        "MERCEDES",
+        "AUDI",
+        "KIA",
+        "HYUNDAI",
+        "CHEVROLET",
+        "FIAT",
+        "CHERY",
+        "GEELY"
+      ],
+      "required": true
+    },
+    "productimg": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "stock": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "minStock": {
+      "type": "integer",
+      "default": 5,
+      "description": "Minimum stock before alert"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "available",
+        "out_of_stock",
+        "discontinued"
+      ],
+      "default": "available"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "barcode": {
+      "type": "string",
+      "unique": true
+    },
+    "weight": {
+      "type": "decimal"
+    },
+    "dimensions": {
+      "type": "json",
+      "description": "Object with length, width, height"
+    },
+    "purchases": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::purchase.purchase",
+      "mappedBy": "product"
+    },
+    "vendeurId": {
+      "type": "string"
+    }
+  }
+}
